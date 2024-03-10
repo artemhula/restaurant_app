@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:restaurant/features/auth/presentation/hello_screen.dart';
+import 'firebase_options.dart';
 
-import 'home_screen.dart';
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -23,6 +28,10 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.w400,
               color: Color.fromARGB(255, 20, 101, 0),
             ),
+            headlineSmall: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            headlineMedium: TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
+
+            headlineLarge:  TextStyle(fontSize: 32, fontWeight: FontWeight.w900),
           ),
           scaffoldBackgroundColor: Colors.black,
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -36,7 +45,7 @@ class MyApp extends StatelessWidget {
           bottomAppBarTheme: const BottomAppBarTheme(
             color: Color.fromARGB(255, 14, 14, 14),
           )),
-      home: const HomeScreen(),
+      home: const AuthScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

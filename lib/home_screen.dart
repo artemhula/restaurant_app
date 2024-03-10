@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant/barcode_screen.dart';
-import 'package:restaurant/history_screen.dart';
-import 'package:restaurant/main_screen.dart';
-import 'package:restaurant/menu_screen.dart';
-import 'package:restaurant/other_screen.dart';
+import 'package:restaurant/views/barcode_screen.dart';
+import 'package:restaurant/views/history_screen.dart';
+import 'package:restaurant/views/main_screen.dart';
+import 'package:restaurant/views/menu_screen.dart';
+import 'package:restaurant/views/other_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
