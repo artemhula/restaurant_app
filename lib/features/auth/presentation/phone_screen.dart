@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:restaurant/features/auth/presentation/otp_screen.dart';
 
 class PhoneScreen extends StatefulWidget {
   PhoneScreen({super.key});
@@ -38,7 +39,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
             children: [
               Text(
                 'Введіть свій номер телефону',
-                textAlign: TextAlign.left,
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(height: 20),
@@ -51,7 +51,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
               TextFormField(
                 onChanged: (value) {
                   setState(() {
-                    phoneNumber = '+${country.countryCode}$value';
+                    phoneNumber = '+${country.phoneCode}$value';
                   });
                 },
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -93,12 +93,23 @@ class _PhoneScreenState extends State<PhoneScreen> {
               const SizedBox(height: 20),
               phoneNumber.length < 14 && phoneNumber.length > 10
                   ? TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OTPScreen(
+                              phoneNumber: phoneNumber,
+                            ),
+                          ),
+                        );
+                      },
                       style: TextButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         foregroundColor: Colors.white,
-                        fixedSize: Size(MediaQuery.of(context).size.width * 0.3,
-                            MediaQuery.of(context).size.height * 0.055),
+                        fixedSize: Size(
+                          MediaQuery.of(context).size.width * 0.3,
+                          MediaQuery.of(context).size.height * 0.055,
+                        ),
                       ),
                       child: Text(
                         'Далі',
