@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant/features/auth/presentation/phone_screen.dart';
+import 'package:restaurant/features/auth/presentation/views/phone_screen.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});

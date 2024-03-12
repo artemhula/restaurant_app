@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 class OTPScreen extends StatelessWidget {
-  OTPScreen({super.key, required this.phoneNumber});
+  const OTPScreen({super.key, required this.phoneNumber});
   final String phoneNumber;
 
   @override
@@ -40,7 +40,9 @@ class OTPScreen extends StatelessWidget {
                 height: 64,
                 child: Pinput(
                   length: 6,
-                  onCompleted: (pin) {},
+                  onCompleted: (pin) {
+                    
+                  },
                   keyboardType: TextInputType.number,
                   defaultPinTheme: defaultPinTheme,
                   focusedPinTheme: defaultPinTheme.copyWith(
