@@ -1,9 +1,8 @@
 import 'package:country_picker/country_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant/features/auth/domain/usecases/send_otp.dart';
+import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
 import 'package:restaurant/features/auth/presentation/views/otp_screen.dart';
 
 class PhoneScreen extends StatefulWidget {
@@ -94,8 +93,12 @@ class _PhoneScreenState extends State<PhoneScreen> {
               const SizedBox(height: 20),
               phoneNumber.length < 14 && phoneNumber.length > 10
                   ? TextButton(
-                      onPressed: () async {
-                        context.read();
+                      onPressed: () {
+                        context.read<AuthCubit>().sendCodeToPhone(phoneNumber: phoneNumber);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => OTPScreen()),
+                        );
                       },
                       style: TextButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
