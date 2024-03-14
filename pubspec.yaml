@@ -43,6 +43,7 @@ dependencies:
   country_picker: ^2.0.25
   pinput: ^4.0.0
   flutter_bloc: ^8.1.4
+  get_it: ^7.6.7
 
 dev_dependencies:
   flutter_test:
