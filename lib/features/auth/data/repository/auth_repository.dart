@@ -9,12 +9,12 @@ class AuthRepositoryImpl implements AuthRepository {
   final FirebaseDataSource datasource;
 
   @override
-  Future<Either<Failure, void>> sendOtp(String phoneNumber) async {
+  Future<Either<Failure, String>> sendOtp(String phoneNumber) async {
     try {
-      await datasource.sendSMS(phoneNumber);
-      return const Right(null);
+      final verificationId = await datasource.sendSMS(phoneNumber);
+      return Right(verificationId);
     } catch (e) {
-      return Left(Failure());
+      return Left(Failure(e.toString()));
     }
   }
 
@@ -25,7 +25,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await datasource.checkSMS(verificationId, smsCode);
       return const Right(null);
     } catch (e) {
-      return Left(Failure());
+      return Left(Failure(e.toString()));
     }
   }
 }

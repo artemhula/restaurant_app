@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class FirebaseDataSource {
-  Future<void> sendSMS(String phoneNumber);
+  Future<String> sendSMS(String phoneNumber);
   Future<void> checkSMS(String verificationId, String smsCode);
 }
 
@@ -11,14 +13,20 @@ class FirebaseDataSourceImpl implements FirebaseDataSource {
   final FirebaseAuth _firebaseAuth;
 
   @override
-  Future<void> sendSMS(String phoneNumber) async {
-    await _firebaseAuth.verifyPhoneNumber(
+  Future<String> sendSMS(String phoneNumber) {
+    final completer = Completer<String>();
+    _firebaseAuth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {},
-      codeSent: (String verificationId, int? resendToken) {},
+      codeSent:  (String verificationId, int? resendToken)  {
+        completer.complete(verificationId);
+      },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
+
+    return completer.future;
+
   }
 
   @override
