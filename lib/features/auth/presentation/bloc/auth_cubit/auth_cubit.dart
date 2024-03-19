@@ -14,9 +14,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   void sendCodeToPhone({required String phoneNumber}) async {
     emit(AuthLoading());
-    print(phoneNumber);
     final result = await sendOtp(phoneNumber);
-    print('sended');
     result.fold(
       (l) => emit(AuthFailure(l.message)),
       (id) {
