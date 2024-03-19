@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
+import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
 import 'package:restaurant/features/auth/presentation/views/hello_screen.dart';
 import 'package:restaurant/locator.dart';
 
@@ -15,8 +16,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<AuthCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+         create: (context) => sl<AuthCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<RegistrationCubit>(),
+        ),
+      ],
+      
       child: MaterialApp(
         theme: ThemeData(
             textTheme: const TextTheme(
@@ -32,7 +41,7 @@ class MyApp extends StatelessWidget {
               headlineSmall:
                   TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               headlineMedium:
-                  TextStyle(fontSize: 26, fontWeight: FontWeight.w800),
+                  TextStyle(fontSize: 23, fontWeight: FontWeight.w700),
               headlineLarge:
                   TextStyle(fontSize: 32, fontWeight: FontWeight.w900),
             ),
