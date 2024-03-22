@@ -19,7 +19,7 @@ class AuthCubit extends Cubit<AuthState> {
       (l) => emit(AuthFailure(l.message)),
       (id) {
         verificationId = id;
-        emit(OtpSended(phoneNumber: phoneNumber));
+        emit(AuthOtpSended(phoneNumber: phoneNumber));
       },
     );
   }
@@ -32,7 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
     );
     result.fold(
       (l) => emit(AuthFailure(l.message)),
-      (r) => emit(OtpVerified()),
+      (r) => emit(AuthOtpVerified()),
     );
   }
 }

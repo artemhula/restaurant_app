@@ -17,4 +17,8 @@ final class UserIsNotRegistered extends RegistrationState {}
 
 final class RegistrationSuccessful extends RegistrationState {}
 
-final class RegistrationFailure extends RegistrationState {}
+final class RegistrationFailure extends RegistrationState {
+  const RegistrationFailure(this.message);
+
+  final String message;
+}

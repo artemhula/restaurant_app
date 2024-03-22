@@ -11,15 +11,15 @@ final class AuthInitial extends AuthState {}
 
 final class AuthLoading extends AuthState {}
 
-final class OtpSended extends AuthState {
-  const OtpSended({required this.phoneNumber});
+final class AuthOtpSended extends AuthState {
+  const AuthOtpSended({required this.phoneNumber});
   final String phoneNumber;
 
   @override
   List<Object> get props => [phoneNumber];
 }
 
-final class OtpVerified extends AuthState {}
+final class AuthOtpVerified extends AuthState {}
 
 final class AuthFailure extends AuthState {
   const AuthFailure(this.message);

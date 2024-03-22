@@ -49,7 +49,7 @@ class PhoneScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const OTPScreen(),
+                                builder: (context) => OTPScreen(phoneNumber: '+${_codeController.text}${_numberController.text}',),
                               ),
                             );
                           },

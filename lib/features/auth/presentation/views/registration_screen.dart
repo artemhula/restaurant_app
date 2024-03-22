@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
+import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
 import 'package:restaurant/features/auth/presentation/widgets/registration_form.dart';
 import 'package:restaurant/home_screen.dart';
 
@@ -31,7 +32,8 @@ class RegistrationScreen extends StatelessWidget {
             );
           }
           if (state is RegistrationFailure) {
-            return const Center(child: Text('oh no!'));
+            ScaffoldMessenger.of(context)
+                .showSnackBar(getErrorSnackbar(state.message));
           }
           return Container();
         },
