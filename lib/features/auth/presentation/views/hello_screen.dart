@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/features/auth/presentation/views/phone_screen.dart';
+import 'package:restaurant/features/auth/presentation/widgets/primary_button.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -16,21 +17,15 @@ class AuthScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineLarge,
             ),
             const SizedBox(height: 20),
-            TextButton(
+            PrimaryButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PhoneScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PhoneScreen()),
+                );
               },
-              style: TextButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  foregroundColor: Colors.white,
-                  fixedSize: Size(MediaQuery.of(context).size.width * 0.3,
-                      MediaQuery.of(context).size.height * 0.05)),
-              child: Text(
-                'Увійти',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-            )
+              text: 'Увійти',
+            ),
           ],
         ),
       ),

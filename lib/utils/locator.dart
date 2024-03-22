@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:restaurant/features/auth/data/datasource/firebase_auth_datasource.dart';
@@ -13,7 +12,7 @@ import 'package:restaurant/features/auth/domain/usecases/register_user.dart';
 import 'package:restaurant/features/auth/domain/usecases/send_otp.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
-import 'package:restaurant/firebase_options.dart';
+import 'package:restaurant/utils/firebase_options.dart';
 
 final sl = GetIt.instance;
 

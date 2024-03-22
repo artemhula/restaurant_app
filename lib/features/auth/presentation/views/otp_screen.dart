@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pinput/pinput.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
 import 'package:restaurant/features/auth/presentation/views/registration_screen.dart';
+import 'package:restaurant/features/auth/presentation/widgets/otp_field.dart';
 import 'package:restaurant/home_screen.dart';
 
 class OTPScreen extends StatelessWidget {
@@ -11,15 +11,7 @@ class OTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultPinTheme = PinTheme(
-      width: 50,
-      height: 56,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.transparent),
-      ),
-    );
+    
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -29,14 +21,15 @@ class OTPScreen extends StatelessWidget {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
                 );
               });
             } else if (state is UserIsNotRegistered) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => RegistrationScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const RegistrationScreen()),
                 );
               });
             }
@@ -67,28 +60,10 @@ class OTPScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(height: 20),
-                    Center(
-                      child: SizedBox(
-                        height: 64,
-                        child: Pinput(
-                          length: 6,
-                          onCompleted: (pin) {
-                            context.read<AuthCubit>().verifyCode(smsCode: pin);
-                          },
-                          keyboardType: TextInputType.number,
-                          defaultPinTheme: defaultPinTheme,
-                          focusedPinTheme: defaultPinTheme.copyWith(
-                            width: 60,
-                            height: 64,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondary,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                  color: Theme.of(context).colorScheme.primary),
-                            ),
-                          ),
-                        ),
-                      ),
+                    OtpField(
+                      onCompleted: (pin) {
+                        context.read<AuthCubit>().verifyCode(smsCode: pin);
+                      },
                     ),
                   ],
                 );
