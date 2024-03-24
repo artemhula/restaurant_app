@@ -17,6 +17,7 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   Future<String> sendSMS(String phoneNumber) {
     final completer = Completer<String>();
     _firebaseAuth.verifyPhoneNumber(
+      timeout: const Duration(seconds: 60),
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) {},
       verificationFailed: (FirebaseAuthException e) {},

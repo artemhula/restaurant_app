@@ -5,6 +5,7 @@ import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/re
 import 'package:restaurant/features/auth/presentation/views/registration_screen.dart';
 import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
 import 'package:restaurant/features/auth/presentation/widgets/otp_field.dart';
+import 'package:restaurant/features/auth/presentation/widgets/resend_button.dart';
 import 'package:restaurant/home_screen.dart';
 
 class OTPScreen extends StatelessWidget {
@@ -53,29 +54,37 @@ class OTPScreen extends StatelessWidget {
               if (state is AuthOtpVerified) {
                 context.read<RegistrationCubit>().checkIsUserRegistered();
               }
-               return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Введіть код',
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      'Ми надіcлали SMS-повідомлення на номер $phoneNumber',
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const SizedBox(height: 20),
-                    OtpField(
-                      onCompleted: (pin) {
-                        context.read<AuthCubit>().verifyCode(smsCode: pin);
-                      },
-                    ),
-                  ],
-                );
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Введіть код',
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Ми надіcлали SMS-повідомлення на номер $phoneNumber',
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 20),
+                  OtpField(
+                    onCompleted: (pin) {
+                      context.read<AuthCubit>().verifyCode(smsCode: pin);
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  ResendButton(
+                    onTap: () {
+                      context
+                          .read<AuthCubit>()
+                          .sendCodeToPhone(phoneNumber: phoneNumber);
+                    },
+                  ),
+                ],
+              );
             },
           ),
         ),
