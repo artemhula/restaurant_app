@@ -3,6 +3,7 @@ import 'package:restaurant/core/errors/failure.dart';
 import 'package:restaurant/features/auth/data/datasource/firebase_auth_datasource.dart';
 import 'package:restaurant/features/auth/data/datasource/firestore_datasource.dart';
 import 'package:restaurant/features/auth/data/models/user.dart';
+import 'package:restaurant/features/auth/domain/entity/user.dart';
 import 'package:restaurant/features/auth/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -60,6 +61,17 @@ class AuthRepositoryImpl implements AuthRepository {
         );
       }
       return const Right(null);
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> getUser() async {
+    try {
+      final authUser = await _firebaseAuthDataSource.getUser();
+      final user = await _firestoreDataSource.getUser(authUser!.uid);
+      return Right(user);
     } catch (e) {
       return Left(Failure(e.toString()));
     }

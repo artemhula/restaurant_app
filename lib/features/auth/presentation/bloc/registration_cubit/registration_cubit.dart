@@ -13,6 +13,7 @@ class RegistrationCubit extends Cubit<RegistrationState> {
 
   void checkIsUserRegistered() async {
     final isRegistered = await checkUser();
+    emit(RegistrationLoading());
     isRegistered.fold(
       (failure) => emit(RegistrationFailure(failure.message)),
       (isRegistered) {

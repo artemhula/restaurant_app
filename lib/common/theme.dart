@@ -8,7 +8,7 @@ final theme = ThemeData(
       fontWeight: FontWeight.w300,
     ),
     labelMedium: TextStyle(
-      fontSize: 20,
+      fontSize: 19,
       fontWeight: FontWeight.w400,
       color: Color.fromARGB(255, 20, 101, 0),
     ),
@@ -31,11 +31,11 @@ final theme = ThemeData(
 );
 
 final defaultPinTheme = PinTheme(
-      width: 50,
-      height: 56,
-      decoration: BoxDecoration(
-        color: theme.colorScheme.secondary,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.transparent),
-      ),
-    );
+  width: 50,
+  height: 56,
+  decoration: BoxDecoration(
+    color: theme.colorScheme.secondary,
+    borderRadius: BorderRadius.circular(8),
+    border: Border.all(color: Colors.transparent),
+  ),
+);

@@ -8,10 +8,12 @@ import 'package:restaurant/features/auth/data/repository/auth_repository.dart';
 import 'package:restaurant/features/auth/domain/repository/auth_repository.dart';
 import 'package:restaurant/features/auth/domain/usecases/check_otp.dart';
 import 'package:restaurant/features/auth/domain/usecases/check_user.dart';
+import 'package:restaurant/features/auth/domain/usecases/get_user.dart';
 import 'package:restaurant/features/auth/domain/usecases/register_user.dart';
 import 'package:restaurant/features/auth/domain/usecases/send_otp.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
+import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
 import 'package:restaurant/utils/firebase_options.dart';
 
 final sl = GetIt.instance;
@@ -20,12 +22,16 @@ Future<void> initializeDependencies() async {
   //blocs
   sl.registerFactory<AuthCubit>(() => AuthCubit(sl(), sl()));
   sl.registerFactory<RegistrationCubit>(() => RegistrationCubit(sl(), sl()));
+  sl.registerFactory<UserCubit>(() => UserCubit(sl()));
+
 
   //usecases
   sl.registerLazySingleton(() => SendOtp(authRepository: sl()));
   sl.registerLazySingleton(() => CheckOtp(authRepository: sl()));
   sl.registerLazySingleton(() => CheckUser(authRepository: sl()));
   sl.registerLazySingleton(() => RegisterUser(authRepository: sl()));
+  sl.registerLazySingleton(() => GetUser(authRepository: sl()));
+
 
   //repo and ds
   sl.registerLazySingleton<AuthRepository>(

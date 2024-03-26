@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/common/theme.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
+import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
 import 'package:restaurant/features/auth/presentation/views/hello_screen.dart';
 import 'package:restaurant/utils/locator.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => sl<AuthCubit>()),
         BlocProvider(create: (context) => sl<RegistrationCubit>()),
+        BlocProvider(create: (context) => sl<UserCubit>())
       ],
       child: MaterialApp(
         theme: theme,

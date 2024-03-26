@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
+import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
 import 'package:restaurant/features/auth/presentation/views/registration_screen.dart';
 import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
 import 'package:restaurant/features/auth/presentation/widgets/otp_field.dart';
@@ -20,6 +21,7 @@ class OTPScreen extends StatelessWidget {
         child: BlocListener<RegistrationCubit, RegistrationState>(
           listener: (context, state) {
             if (state is UserIsRegistered) {
+              context.read<UserCubit>().receiveUser();
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacement(
                   context,

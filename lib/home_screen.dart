@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
 import 'package:restaurant/views/barcode_screen.dart';
 import 'package:restaurant/views/history_screen.dart';
 import 'package:restaurant/views/main_screen.dart';
@@ -17,47 +19,70 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton.large(
-        onPressed: () {
-          setState(() {
-            _currentIndex = 2;
-          });
-          _pageController.jumpToPage(2);
-        },
-        child: Icon(_icons[2]),
-      ),
-      bottomNavigationBar: BottomAppBar(
-          child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildTabIcon(0),
-                _buildTabIcon(1),
-              ],
+    return BlocBuilder<UserCubit, UserState>(
+      builder: (context, state) {
+        if (state is UserLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (state is UserLoaded) {
+          final List<Widget> screens = [
+            MainScreen(user: state.user),
+            const MenuScreen(),
+            const BarcodeScreen(),
+            const HistoryScreen(),
+            const OtherScreen(),
+          ];
+          return Scaffold(
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: FloatingActionButton.large(
+              onPressed: () {
+                setState(() {
+                  _currentIndex = 2;
+                });
+                _pageController.jumpToPage(2);
+              },
+              child: Icon(_icons[2]),
             ),
-          ),
-          SizedBox(width: MediaQuery.of(context).size.width * 0.25),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            bottomNavigationBar: BottomAppBar(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildTabIcon(3),
-                _buildTabIcon(4),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildTabIcon(0),
+                      _buildTabIcon(1),
+                    ],
+                  ),
+                ),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.25),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildTabIcon(3),
+                      _buildTabIcon(4),
+                    ],
+                  ),
+                ),
               ],
+            )),
+            body: PageView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _pageController,
+              children: screens,
             ),
-          ),
-        ],
-      )),
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        children: _screens,
-      ),
+          );
+        }
+        if (state is UserFailure) {
+          return Center(
+            child: Text(state.message),
+          );
+        }
+        return Container();
+      },
     );
   }
 
@@ -85,13 +110,5 @@ class _HomeScreenState extends State<HomeScreen> {
     Icons.qr_code_rounded,
     Icons.history_rounded,
     Icons.person_outline_sharp,
-  ];
-
-  List<Widget> _screens = [
-    MainScreen(),
-    MenuScreen(),
-    BarcodeScreen(),
-    HistoryScreen(),
-    OtherScreen(),
   ];
 }

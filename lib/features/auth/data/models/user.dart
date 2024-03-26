@@ -18,7 +18,7 @@ class UserModel extends UserEntity {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         uid: json['uid'],
         name: json['name'],
-        birthday: json['birthday'],
+        birthday: json['birthday'].toDate(),
         sex: json['sex'],
       );
 }

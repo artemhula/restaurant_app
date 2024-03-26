@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant/features/auth/domain/entity/user.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  const MainScreen({super.key, required this.user});
+  final UserEntity user;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class MainScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.labelLarge,
                               ),
                               Text(
-                                'Артем',
+                                user.name,
                                 style: Theme.of(context).textTheme.labelMedium,
                               ),
                             ],
