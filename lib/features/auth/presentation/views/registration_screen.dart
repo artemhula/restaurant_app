@@ -4,7 +4,7 @@ import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/re
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
 import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
 import 'package:restaurant/features/auth/presentation/widgets/registration_form.dart';
-import 'package:restaurant/home_screen.dart';
+import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
 
 class RegistrationScreen extends StatelessWidget {
   const RegistrationScreen({super.key});
@@ -26,11 +26,12 @@ class RegistrationScreen extends StatelessWidget {
           }
           if (state is RegistrationSuccessful) {
             context.read<UserCubit>().receiveUser();
-            Navigator.pushReplacement(
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => const HomeScreen(),
+                builder: (context) => const MainScreen(),
               ),
+              (_) => false,
             );
           }
           if (state is RegistrationFailure) {

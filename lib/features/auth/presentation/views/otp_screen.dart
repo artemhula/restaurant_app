@@ -7,7 +7,7 @@ import 'package:restaurant/features/auth/presentation/views/registration_screen.
 import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
 import 'package:restaurant/features/auth/presentation/widgets/otp_field.dart';
 import 'package:restaurant/features/auth/presentation/widgets/resend_button.dart';
-import 'package:restaurant/home_screen.dart';
+import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
 
 class OTPScreen extends StatelessWidget {
   const OTPScreen({super.key, required this.phoneNumber});
@@ -23,9 +23,10 @@ class OTPScreen extends StatelessWidget {
             if (state is UserIsRegistered) {
               context.read<UserCubit>().receiveUser();
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.pushReplacement(
+                Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const MainScreen()),
+                  (_) => false,
                 );
               });
             } else if (state is UserIsNotRegistered) {
