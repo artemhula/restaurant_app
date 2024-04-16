@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
 
-class Product extends StatelessWidget {
-  const Product({super.key});
+class Product extends StatefulWidget {
+  const Product({
+    super.key,
+    required this.id,
+    required this.photoUrl,
+    required this.title,
+    required this.weight,
+    required this.price,
+  });
+  final int id;
+  final String photoUrl;
+  final String title;
+  final int weight;
+  final int price;
+
+  @override
+  State<Product> createState() => _ProductState();
+}
+
+class _ProductState extends State<Product> {
+  bool isInCart = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAlias,
-      width: MediaQuery.of(context).size.width * 0.38,
-      height: MediaQuery.of(context).size.height * 0.24,
+      // width: MediaQuery.of(context).size.width * 0.38,
+      // height: MediaQuery.of(context).size.height * 0.24,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Theme.of(context).colorScheme.tertiary.withOpacity(0.1),
@@ -23,39 +42,58 @@ class Product extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.height * 0.011,
-                right: MediaQuery.of(context).size.height * 0.01,
-                top: MediaQuery.of(context).size.height * 0.01),
+              left: MediaQuery.of(context).size.height * 0.011,
+              right: MediaQuery.of(context).size.height * 0.012,
+              top: MediaQuery.of(context).size.height * 0.01,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Філадельфія',
+                  widget.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const Text(
-                  '250г.',
-                  textAlign: TextAlign.end,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.5),
+                    child: Text(
+                      '${widget.weight}г.',
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ),
                 ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.001),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.favorite_border,
-                      color: Colors.pink.withOpacity(0.8),
-                    ),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                          Theme.of(context).colorScheme.primary,
-                        ),
-                        foregroundColor: MaterialStatePropertyAll(Colors.white),
+                    Expanded(
+                      child: Text(
+                        '${widget.price} ₴',
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
-                      onPressed: () {},
-                      child: Icon(Icons.shopping_cart_outlined),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isInCart = !isInCart;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: isInCart ? Theme.of(context).colorScheme.tertiary: Theme.of(context).colorScheme.primary,
+                            borderRadius: BorderRadius.circular(15)),
+                        child:  Padding(
+                          padding:
+                              const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                          child: Icon(isInCart ? Icons.check_rounded : Icons.shopping_cart_outlined),
+                        ),
+                      ),
                     ),
                   ],
                 )
