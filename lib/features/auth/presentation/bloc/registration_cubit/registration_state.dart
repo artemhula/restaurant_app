@@ -11,14 +11,21 @@ final class RegistrationInitial extends RegistrationState {}
 
 final class RegistrationLoading extends RegistrationState {}
 
-final class UserIsRegistered extends RegistrationState {}
+final class UserIsRegistered extends RegistrationState {
+  const UserIsRegistered({required this.user});
+
+  final UserEntity user;
+
+  @override
+  List<Object> get props => [user];
+}
 
 final class UserIsNotRegistered extends RegistrationState {}
 
-final class RegistrationSuccessful extends RegistrationState {}
-
 final class RegistrationFailure extends RegistrationState {
   const RegistrationFailure(this.message);
-
   final String message;
+
+  @override
+  List<Object> get props => [message];
 }

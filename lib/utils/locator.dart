@@ -23,7 +23,7 @@ final sl = GetIt.instance;
 Future<void> initializeDependencies() async {
   //blocs
   sl.registerFactory<AuthCubit>(() => AuthCubit(sl(), sl()));
-  sl.registerFactory<RegistrationCubit>(() => RegistrationCubit(sl(), sl()));
+  sl.registerFactory<RegistrationCubit>(() => RegistrationCubit(sl(), sl(), sl()));
   sl.registerFactory<UserCubit>(() => UserCubit(sl()));
 
   //usecases
