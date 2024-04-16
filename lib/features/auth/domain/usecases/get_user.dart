@@ -7,7 +7,7 @@ class GetUser {
   GetUser({required this.authRepository});
   final AuthRepository authRepository;
 
-  Future<Either<Failure, UserEntity>> call() async {
+  Future<Either<Failure, UserEntity?>> call() async {
     return await authRepository.getUser();
   }
 }
