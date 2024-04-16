@@ -40,9 +40,8 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, bool>> checkUser() async {
     try {
       final user = await _firebaseAuthDataSource.getUser();
-      return Right(
-        user != null && await _firestoreDataSource.checkExistingUser(user.uid),
-      );
+      return Right(user != null &&
+          await _firestoreDataSource.checkExistingUser(user.uid));
     } catch (e) {
       return Left(Failure(e.toString()));
     }
@@ -70,25 +69,24 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> getUser() async {
+  Future<Either<Failure, UserEntity?>> getUser() async {
     try {
-      //чи треба так робити?
-      var user = await _localDatasource.getUser();
-      if (user == null) {
-        final authUser = await _firebaseAuthDataSource.getUser();
-        user = await _firestoreDataSource.getUser(authUser!.uid);
-        await _localDatasource.saveUser(user.toJson());
-      } else {}
-      return Right(user);
-    } catch (e) {
-      return Left(Failure(e.toString()));
-    }
-  }
+      final userFromLocal = await _localDatasource.getUser();
+      if (userFromLocal != null) {
+        return Right(userFromLocal);
+      }
 
-  @override
-  Future<Either<Failure, UserEntity?>> retrieveLastUser() async {
-    try {
-      return Right(await _localDatasource.getUser());
+      final userFromFirebase = await _firebaseAuthDataSource.getUser();
+      final userFromFirestore = userFromFirebase != null
+          ? await _firestoreDataSource.getUser(userFromFirebase.uid)
+          : null;
+
+      if (userFromFirestore != null) {
+        await _localDatasource.saveUser(userFromFirestore.toJson());
+        return Right(userFromFirestore);
+      }
+
+      return const Left(Failure('User not found'));
     } catch (e) {
       return Left(Failure(e.toString()));
     }

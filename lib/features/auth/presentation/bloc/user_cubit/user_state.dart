@@ -11,6 +11,8 @@ final class UserInitial extends UserState {}
 
 final class UserLoading extends UserState {}
 
+final class UserNotLoaded extends UserState {}
+
 final class UserLoaded extends UserState {
   const UserLoaded({required this.user});
   final UserEntity user;

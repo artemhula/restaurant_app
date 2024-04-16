@@ -23,10 +23,9 @@ class OTPScreen extends StatelessWidget {
             if (state is UserIsRegistered) {
               context.read<UserCubit>().receiveUser();
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.pushAndRemoveUntil(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const MainScreen()),
-                  (_) => false,
                 );
               });
             } else if (state is UserIsNotRegistered) {

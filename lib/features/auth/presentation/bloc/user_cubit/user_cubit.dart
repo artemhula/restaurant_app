@@ -16,7 +16,11 @@ class UserCubit extends Cubit<UserState> {
     final userOrFailure = await getUser();
     userOrFailure.fold(
       (failure) => emit(UserFailure(message: failure.message)),
-      (user) => emit(UserLoaded(user: user)),
+      (user) {
+        user == null
+            ? emit(UserNotLoaded())
+            : emit(UserLoaded(user: user));
+      },
     );
   }
 
