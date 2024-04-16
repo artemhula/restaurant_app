@@ -1,33 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
 import 'package:restaurant/features/auth/presentation/views/phone_screen.dart';
-import 'package:restaurant/features/auth/presentation/widgets/primary_button.dart';
+import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
 
-class AuthScreen extends StatelessWidget {
-  const AuthScreen({super.key});
+class InitialScreen extends StatelessWidget {
+  const InitialScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<UserCubit>().receiveUser();
+    });
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Вітаємо!',
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            const SizedBox(height: 20),
-            PrimaryButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => PhoneScreen()),
-                );
-              },
-              text: 'Увійти',
-            ),
-          ],
-        ),
+      body: BlocConsumer<UserCubit, UserState>(
+        listener: (context, state) {
+          if (state is UserLoaded) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const MainScreen()));
+          }
+          if (state is UserNotLoaded) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => PhoneScreen()));
+          }
+        },
+        builder: (BuildContext context, UserState state) {
+          if (state is UserLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state is UserFailure) {
+            return Center(child: Text(state.message));
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }
