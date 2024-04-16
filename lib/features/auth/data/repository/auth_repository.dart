@@ -2,15 +2,18 @@ import 'package:dartz/dartz.dart';
 import 'package:restaurant/core/errors/failure.dart';
 import 'package:restaurant/features/auth/data/datasource/firebase_auth_datasource.dart';
 import 'package:restaurant/features/auth/data/datasource/firestore_datasource.dart';
+import 'package:restaurant/features/auth/data/datasource/local_datasource.dart';
 import 'package:restaurant/features/auth/data/models/user.dart';
 import 'package:restaurant/features/auth/domain/entity/user.dart';
 import 'package:restaurant/features/auth/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  AuthRepositoryImpl(this._firebaseAuthDataSource, this._firestoreDataSource);
+  AuthRepositoryImpl(this._firebaseAuthDataSource, this._firestoreDataSource,
+      this._localDatasource);
 
   final FirebaseAuthDataSource _firebaseAuthDataSource;
   final FireStoreDataSource _firestoreDataSource;
+  final LocalDatasource _localDatasource;
 
   @override
   Future<Either<Failure, String>> sendOtp(String phoneNumber) async {
@@ -37,9 +40,8 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, bool>> checkUser() async {
     try {
       final user = await _firebaseAuthDataSource.getUser();
-      return Right(
-        user != null && await _firestoreDataSource.checkExistingUser(user.uid),
-      );
+      return Right(user != null &&
+          await _firestoreDataSource.checkExistingUser(user.uid));
     } catch (e) {
       return Left(Failure(e.toString()));
     }
@@ -67,11 +69,24 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> getUser() async {
+  Future<Either<Failure, UserEntity?>> getUser() async {
     try {
-      final authUser = await _firebaseAuthDataSource.getUser();
-      final user = await _firestoreDataSource.getUser(authUser!.uid);
-      return Right(user);
+      final userFromLocal = await _localDatasource.getUser();
+      if (userFromLocal != null) {
+        return Right(userFromLocal);
+      }
+
+      final userFromFirebase = await _firebaseAuthDataSource.getUser();
+      final userFromFirestore = userFromFirebase != null
+          ? await _firestoreDataSource.getUser(userFromFirebase.uid)
+          : null;
+
+      if (userFromFirestore != null) {
+        await _localDatasource.saveUser(userFromFirestore.toJson());
+        return Right(userFromFirestore);
+      }
+
+      return const Left(Failure('User not found'));
     } catch (e) {
       return Left(Failure(e.toString()));
     }
