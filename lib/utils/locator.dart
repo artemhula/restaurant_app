@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:restaurant/features/auth/data/datasource/firebase_auth_datasource.dart';
 import 'package:restaurant/features/auth/data/datasource/firestore_datasource.dart';
+import 'package:restaurant/features/auth/data/datasource/local_datasource.dart';
 import 'package:restaurant/features/auth/data/repository/auth_repository.dart';
 import 'package:restaurant/features/auth/domain/repository/auth_repository.dart';
 import 'package:restaurant/features/auth/domain/usecases/check_otp.dart';
@@ -24,7 +26,6 @@ Future<void> initializeDependencies() async {
   sl.registerFactory<RegistrationCubit>(() => RegistrationCubit(sl(), sl()));
   sl.registerFactory<UserCubit>(() => UserCubit(sl()));
 
-
   //usecases
   sl.registerLazySingleton(() => SendOtp(authRepository: sl()));
   sl.registerLazySingleton(() => CheckOtp(authRepository: sl()));
@@ -35,15 +36,19 @@ Future<void> initializeDependencies() async {
 
   //repo and ds
   sl.registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryImpl(sl(), sl()));
+      () => AuthRepositoryImpl(sl(), sl(), sl()));
   sl.registerLazySingleton<FirebaseAuthDataSource>(
       () => FirebaseAuthDataSourceImpl(sl()));
   sl.registerLazySingleton<FireStoreDataSource>(
       () => FireStoreDataSourceImpl(sl()));
+  sl.registerLazySingleton<LocalDatasource>(
+      () => LocalDatasourceImpl(box: sl(instanceName: 'userBox')));
 
   //ext
-
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
+  await Hive.initFlutter();
+  await Hive.openBox('user');
+  sl.registerLazySingleton(() => Hive.box('user'), instanceName: 'userBox');
 }
