@@ -21,8 +21,6 @@ final class UserLoaded extends UserState {
   List<Object> get props => [user];
 }
 
-final class UserNotLoaded extends UserState {}
-
 final class UserFailure extends UserState {
   const UserFailure({required this.message});
   final String message;
