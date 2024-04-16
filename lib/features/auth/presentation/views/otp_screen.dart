@@ -25,7 +25,7 @@ class OTPScreen extends StatelessWidget {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const MainScreen()),
+                  MaterialPageRoute(builder: (context) => MainScreen(user: state.user,)),
                 );
               });
             } else if (state is UserIsNotRegistered) {

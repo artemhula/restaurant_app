@@ -24,12 +24,12 @@ class RegistrationScreen extends StatelessWidget {
               },
             );
           }
-          if (state is RegistrationSuccessful) {
+          if (state is UserIsRegistered) {
             context.read<UserCubit>().receiveUser();
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => const MainScreen(),
+                builder: (context) => MainScreen(user: state.user),
               ),
               (_) => false,
             );

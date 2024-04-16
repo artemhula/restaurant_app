@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
+import 'package:restaurant/features/auth/domain/entity/user.dart';
 import 'package:restaurant/features/menu/presentation/widgets/category_tab_bar.dart';
 import 'package:restaurant/features/menu/presentation/widgets/category_tab_view.dart';
 import 'package:restaurant/utils/tabs.dart';
 
 class MainScreen extends StatelessWidget{
-  const MainScreen({super.key});
+  const MainScreen({super.key, required this.user});
+  final UserEntity user;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserCubit, UserState>(
-      builder: (context, state) {
-        if (state is UserLoading) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (state is UserLoaded) {
           return DefaultTabController(
             length: tabs.length,
             child: Scaffold(
@@ -36,7 +30,7 @@ class MainScreen extends StatelessWidget{
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: Text(
-                      'Привіт, ${state.user.name}.',
+                      'Привіт, ${user.name}.',
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                   ),
@@ -51,14 +45,9 @@ class MainScreen extends StatelessWidget{
             ),
           );
         }
-        if (state is UserFailure) {
-          return Center(
-            child: Text(state.message),
-          );
-        }
-        return Container();
-      },
-    );
-  }
+        
+      
+    
+  
 }
 

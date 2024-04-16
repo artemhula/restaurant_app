@@ -17,7 +17,12 @@ class InitialScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is UserLoaded) {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const MainScreen()));
+              MaterialPageRoute(
+                builder: (context) => MainScreen(
+                  user: state.user,
+                ),
+              ),
+            );
           }
           if (state is UserNotLoaded) {
             Navigator.of(context).pushReplacement(
