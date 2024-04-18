@@ -16,12 +16,13 @@ class PrimaryButton extends StatelessWidget {
       style: TextButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
-        fixedSize: Size(MediaQuery.of(context).size.width * 0.3,
-            MediaQuery.of(context).size.height * 0.05),
       ),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.headlineSmall,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
       ),
     );
   }
