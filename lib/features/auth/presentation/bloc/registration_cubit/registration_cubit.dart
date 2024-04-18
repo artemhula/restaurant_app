@@ -29,9 +29,9 @@ class RegistrationCubit extends Cubit<RegistrationState> {
     );
   }
 
-  void register(String name, bool sex, DateTime birthday) async {
+  void register(String name, bool sex) async {
     emit(RegistrationLoading());
-    final registerOrFaliure = await registerUser(name, sex, birthday);
+    final registerOrFaliure = await registerUser(name, sex);
     registerOrFaliure.fold(
       (failure) => emit(RegistrationFailure(failure.message)),
       (success) => _getUserAndEmitState(),

@@ -6,7 +6,7 @@ class RegisterUser {
   RegisterUser({required this.authRepository});
   final AuthRepository authRepository;
   
-  Future<Either<Failure, void>> call(String name, bool sex, DateTime birthday) async {
-    return await authRepository.registerUser(name, sex, birthday);
+  Future<Either<Failure, void>> call(String name, bool sex) async {
+    return await authRepository.registerUser(name, sex);
   }
 }

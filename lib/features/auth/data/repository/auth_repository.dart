@@ -49,7 +49,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, void>> registerUser(
-      String name, bool sex, DateTime birthday) async {
+      String name, bool sex) async {
     try {
       final user = await _firebaseAuthDataSource.getUser();
       if (user != null) {
@@ -57,7 +57,6 @@ class AuthRepositoryImpl implements AuthRepository {
           UserModel(
             uid: user.uid,
             name: name,
-            birthday: birthday,
             sex: sex,
           ),
         );
@@ -86,7 +85,7 @@ class AuthRepositoryImpl implements AuthRepository {
         return Right(userFromFirestore);
       }
 
-      return const Left(Failure('User not found'));
+      return const Right(null);
     } catch (e) {
       return Left(Failure(e.toString()));
     }
