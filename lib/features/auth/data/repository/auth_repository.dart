@@ -90,4 +90,15 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(Failure(e.toString()));
     }
   }
+  
+  @override
+  Future<Either<Failure, void>> leaveUser() async {
+    try {
+      await _firebaseAuthDataSource.logOut();
+      await _localDatasource.removeUser();
+      return const Right(null);
+    } catch (e) {
+        return Left(Failure(e.toString()));
+    }
+  }
 }

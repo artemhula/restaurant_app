@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurant/features/menu/presentation/views/arguments/main_screen_arguments.dart';
 import 'package:restaurant/features/menu/presentation/widgets/category_tab_bar.dart';
 import 'package:restaurant/features/menu/presentation/widgets/category_tab_view.dart';
+import 'package:restaurant/features/profile/view/profile_screen.dart';
 import 'package:restaurant/utils/tabs.dart';
 
 class MainScreen extends StatelessWidget {
@@ -19,11 +20,16 @@ class MainScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('cafe'),
-          actions: const [
+          actions: [
             //profile button
-            Padding(
-              padding: EdgeInsets.only(right: 15),
-              child: Icon(Icons.person),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(ProfileScreen.routeName);
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(right: 15),
+                child: Icon(Icons.person),
+              ),
             ),
           ],
         ),

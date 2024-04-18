@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:restaurant/features/auth/presentation/widgets/primary_button.dart';
+import 'package:restaurant/common/widgets/primary_button.dart';
 
 class RegistrationForm extends StatefulWidget {
   final Function(String, bool) onRegister;

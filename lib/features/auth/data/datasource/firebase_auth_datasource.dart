@@ -6,6 +6,7 @@ abstract class FirebaseAuthDataSource {
   Future<String> sendSMS(String phoneNumber);
   Future<void> checkSMS(String verificationId, String smsCode);
   Future<User?> getUser();
+  Future<void> logOut();
 }
 
 class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
@@ -42,5 +43,10 @@ class FirebaseAuthDataSourceImpl implements FirebaseAuthDataSource {
   @override
   Future<User?> getUser() async {
     return _firebaseAuth.currentUser;
+  }
+
+  @override
+  Future<void> logOut() async {
+    _firebaseAuth.signOut();
   }
 }

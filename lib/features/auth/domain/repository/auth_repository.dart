@@ -8,4 +8,5 @@ abstract class AuthRepository {
   Future<Either<Failure, bool>> checkUser();
   Future<Either<Failure, void>> registerUser(String name, bool sex);
   Future<Either<Failure, UserEntity?>> getUser();
+  Future<Either<Failure, void>> leaveUser();
 }

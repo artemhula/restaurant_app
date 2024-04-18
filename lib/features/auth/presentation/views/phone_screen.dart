@@ -4,7 +4,7 @@ import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit
 import 'package:restaurant/features/auth/presentation/views/arguments/otp_screen_arguments.dart';
 import 'package:restaurant/features/auth/presentation/views/otp_screen.dart';
 import 'package:restaurant/features/auth/presentation/widgets/phone_field.dart';
-import 'package:restaurant/features/auth/presentation/widgets/primary_button.dart';
+import 'package:restaurant/common/widgets/primary_button.dart';
 
 class PhoneScreen extends StatelessWidget {
   PhoneScreen({super.key});

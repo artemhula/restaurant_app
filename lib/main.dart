@@ -9,6 +9,7 @@ import 'package:restaurant/features/auth/presentation/views/otp_screen.dart';
 import 'package:restaurant/features/auth/presentation/views/phone_screen.dart';
 import 'package:restaurant/features/auth/presentation/views/registration_screen.dart';
 import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
+import 'package:restaurant/features/profile/view/profile_screen.dart';
 import 'package:restaurant/utils/locator.dart';
 
 void main() async {
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
           OTPScreen.routeName: (context) => const OTPScreen(),
           RegistrationScreen.routeName: (context) => const RegistrationScreen(),
           MainScreen.routeName:(context) => const MainScreen(),
+          ProfileScreen.routeName:(context) => const ProfileScreen(),
         },
       ),
     );
