@@ -3,18 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
+import 'package:restaurant/features/auth/presentation/views/arguments/otp_screen_arguments.dart';
 import 'package:restaurant/features/auth/presentation/views/registration_screen.dart';
 import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
 import 'package:restaurant/features/auth/presentation/widgets/otp_field.dart';
 import 'package:restaurant/features/auth/presentation/widgets/resend_button.dart';
+import 'package:restaurant/features/menu/presentation/views/arguments/main_screen_arguments.dart';
 import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
 
 class OTPScreen extends StatelessWidget {
-  const OTPScreen({super.key, required this.phoneNumber});
-  final String phoneNumber;
+  const OTPScreen({super.key});
 
+  static const routeName = '/otp';
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as OTPScreenArguments;
+    final phoneNumber = args.phoneNumber;
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -23,18 +29,16 @@ class OTPScreen extends StatelessWidget {
             if (state is UserIsRegistered) {
               context.read<UserCubit>().receiveUser();
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.pushReplacement(
+                Navigator.pushReplacementNamed(
                   context,
-                  MaterialPageRoute(builder: (context) => MainScreen(user: state.user,)),
+                  MainScreen.routeName,
+                  arguments: MainScreenArguments(user: state.user),
                 );
               });
             } else if (state is UserIsNotRegistered) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RegistrationScreen()),
-                );
+                Navigator.pushReplacementNamed(
+                    context, RegistrationScreen.routeName);
               });
             }
           },

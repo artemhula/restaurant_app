@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:restaurant/features/auth/presentation/widgets/primary_button.dart';
 
 class RegistrationForm extends StatefulWidget {
-  final Function(String, bool, DateTime) onRegister;
+  final Function(String, bool) onRegister;
 
   const RegistrationForm({required this.onRegister, Key? key})
       : super(key: key);
@@ -14,7 +14,6 @@ class RegistrationForm extends StatefulWidget {
 
 class _RegistrationFormState extends State<RegistrationForm> {
   String name = '';
-  DateTime birthday = DateTime.now();
   bool sex = true;
 
   @override
@@ -49,40 +48,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
               ),
             ),
             const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Дата народження\n${birthday.day}/${birthday.month}/${birthday.year}',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                TextButton(
-                  onPressed: () async {
-                    DateTime? pickedBirthday = await showDatePicker(
-                      context: context,
-                      firstDate: DateTime(1924),
-                      lastDate: birthday,
-                      currentDate: birthday,
-                    );
-                    if (pickedBirthday != null) {
-                      setState(() {
-                        birthday = pickedBirthday;
-                      });
-                    }
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                    foregroundColor: Colors.white,
-                    fixedSize: Size(
-                      MediaQuery.of(context).size.width * 0.3,
-                      MediaQuery.of(context).size.height * 0.055,
-                    ),
-                  ),
-                  child: const Text('Обрати'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 25),
             Text('Стать', style: Theme.of(context).textTheme.headlineMedium),
             Row(
               children: [
@@ -124,7 +89,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
             Center(
               child: PrimaryButton(
                 onPressed: () {
-                  widget.onRegister(name, sex, birthday);
+                  widget.onRegister(name, sex);
                 },
                 text: 'Готово',
               ),

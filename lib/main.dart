@@ -5,6 +5,10 @@ import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
 import 'package:restaurant/features/auth/presentation/views/hello_screen.dart';
+import 'package:restaurant/features/auth/presentation/views/otp_screen.dart';
+import 'package:restaurant/features/auth/presentation/views/phone_screen.dart';
+import 'package:restaurant/features/auth/presentation/views/registration_screen.dart';
+import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
 import 'package:restaurant/utils/locator.dart';
 
 void main() async {
@@ -27,6 +31,13 @@ class MyApp extends StatelessWidget {
         theme: theme,
         home: const InitialScreen(),
         debugShowCheckedModeBanner: false,
+        routes: {
+          InitialScreen.routeName: (context) => const InitialScreen(),
+          PhoneScreen.routeName:(context) => PhoneScreen(),
+          OTPScreen.routeName: (context) => const OTPScreen(),
+          RegistrationScreen.routeName: (context) => const RegistrationScreen(),
+          MainScreen.routeName:(context) => const MainScreen(),
+        },
       ),
     );
   }

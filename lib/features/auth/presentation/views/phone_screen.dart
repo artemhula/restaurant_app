@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
+import 'package:restaurant/features/auth/presentation/views/arguments/otp_screen_arguments.dart';
 import 'package:restaurant/features/auth/presentation/views/otp_screen.dart';
 import 'package:restaurant/features/auth/presentation/widgets/phone_field.dart';
 import 'package:restaurant/features/auth/presentation/widgets/primary_button.dart';
 
 class PhoneScreen extends StatelessWidget {
   PhoneScreen({super.key});
+
+  static const routeName = '/phone';
+
   final _numberController = TextEditingController();
   final _codeController = TextEditingController();
 
@@ -46,11 +50,12 @@ class PhoneScreen extends StatelessWidget {
                                   phoneNumber:
                                       '+${_codeController.text}${_numberController.text}',
                                 );
-                            Navigator.push(
+                            Navigator.pushReplacementNamed(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => OTPScreen(phoneNumber: '+${_codeController.text}${_numberController.text}',),
-                              ),
+                              OTPScreen.routeName,
+                              arguments: OTPScreenArguments(
+                                  phoneNumber:
+                                      '+${_codeController.text}${_numberController.text}'),
                             );
                           },
                           text: 'Далі',

@@ -4,10 +4,13 @@ import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/re
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
 import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
 import 'package:restaurant/features/auth/presentation/widgets/registration_form.dart';
+import 'package:restaurant/features/menu/presentation/views/arguments/main_screen_arguments.dart';
 import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
 
 class RegistrationScreen extends StatelessWidget {
   const RegistrationScreen({super.key});
+
+  static const routeName = '/registration';
 
   @override
   Widget build(BuildContext context) {
@@ -19,24 +22,24 @@ class RegistrationScreen extends StatelessWidget {
           }
           if (state is UserIsNotRegistered) {
             return RegistrationForm(
-              onRegister: (name, sex, birthday) {
-                context.read<RegistrationCubit>().register(name, sex, birthday);
+              onRegister: (name, sex) {
+                context.read<RegistrationCubit>().register(name, sex);
               },
             );
           }
           if (state is UserIsRegistered) {
             context.read<UserCubit>().receiveUser();
-            Navigator.pushAndRemoveUntil(
+            Navigator.pushReplacementNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) => MainScreen(user: state.user),
-              ),
-              (_) => false,
+              MainScreen.routeName,
+              arguments: MainScreenArguments(user: state.user),
             );
           }
           if (state is RegistrationFailure) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(getErrorSnackbar(state.message));
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(getErrorSnackbar(state.message));
+            });
           }
           return Container();
         },
