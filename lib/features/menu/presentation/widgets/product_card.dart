@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Product extends StatefulWidget {
-  const Product({
+class ProductCard extends StatefulWidget {
+  const ProductCard({
     super.key,
     required this.id,
     required this.photoUrl,
@@ -16,18 +16,16 @@ class Product extends StatefulWidget {
   final int price;
 
   @override
-  State<Product> createState() => _ProductState();
+  State<ProductCard> createState() => _ProductCardState();
 }
 
-class _ProductState extends State<Product> {
+class _ProductCardState extends State<ProductCard> {
   bool isInCart = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAlias,
-      // width: MediaQuery.of(context).size.width * 0.38,
-      // height: MediaQuery.of(context).size.height * 0.24,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: Theme.of(context).colorScheme.tertiary.withOpacity(0.1),
@@ -39,6 +37,7 @@ class _ProductState extends State<Product> {
             'assets/philadelphia.jpg',
             fit: BoxFit.cover,
             height: MediaQuery.of(context).size.height * 0.12,
+            width: double.infinity,
           ),
           Padding(
             padding: EdgeInsets.only(
