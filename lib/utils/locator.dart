@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
@@ -17,6 +18,9 @@ import 'package:restaurant/features/auth/domain/usecases/send_otp.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
+import 'package:restaurant/features/menu/data/datasource/remote_datasource.dart';
+import 'package:restaurant/features/menu/domain/usecases/get_products.dart';
+import 'package:restaurant/features/menu/presentation/bloc/product_cubit/product_cubit.dart';
 import 'package:restaurant/utils/firebase_options.dart';
 
 final sl = GetIt.instance;
@@ -24,8 +28,10 @@ final sl = GetIt.instance;
 Future<void> initializeDependencies() async {
   //blocs
   sl.registerFactory<AuthCubit>(() => AuthCubit(sl(), sl()));
-  sl.registerFactory<RegistrationCubit>(() => RegistrationCubit(sl(), sl(), sl()));
+  sl.registerFactory<RegistrationCubit>(
+      () => RegistrationCubit(sl(), sl(), sl()));
   sl.registerFactory<UserCubit>(() => UserCubit(sl(), sl()));
+  sl.registerFactory<ProductCubit>(() => ProductCubit(sl()));
 
   //usecases
   sl.registerLazySingleton(() => SendOtp(authRepository: sl()));
@@ -34,7 +40,7 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton(() => RegisterUser(authRepository: sl()));
   sl.registerLazySingleton(() => GetUser(authRepository: sl()));
   sl.registerLazySingleton(() => LeaveUser(authRepository: sl()));
-
+  sl.registerLazySingleton(() => GetProducts(productRepository: sl()));
 
   //repo and ds
   sl.registerLazySingleton<AuthRepository>(
@@ -45,6 +51,8 @@ Future<void> initializeDependencies() async {
       () => FireStoreDataSourceImpl(sl()));
   sl.registerLazySingleton<LocalDatasource>(
       () => LocalDatasourceImpl(box: sl(instanceName: 'userBox')));
+  sl.registerLazySingleton<ProductRemoteDataSource>(
+      () => ProductRemoteDataSourceImpl(dio: sl()));
 
   //ext
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -53,4 +61,5 @@ Future<void> initializeDependencies() async {
   await Hive.initFlutter();
   await Hive.openBox('usfe');
   sl.registerLazySingleton(() => Hive.box('usfe'), instanceName: 'userBox');
+  sl.registerLazySingleton(() => Dio());
 }
