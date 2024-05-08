@@ -8,6 +8,7 @@ import 'package:restaurant/features/auth/presentation/views/hello_screen.dart';
 import 'package:restaurant/features/auth/presentation/views/otp_screen.dart';
 import 'package:restaurant/features/auth/presentation/views/phone_screen.dart';
 import 'package:restaurant/features/auth/presentation/views/registration_screen.dart';
+import 'package:restaurant/features/menu/presentation/bloc/product_cubit/product_cubit.dart';
 import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
 import 'package:restaurant/features/profile/view/profile_screen.dart';
 import 'package:restaurant/utils/locator.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => sl<AuthCubit>()),
         BlocProvider(create: (context) => sl<RegistrationCubit>()),
-        BlocProvider(create: (context) => sl<UserCubit>())
+        BlocProvider(create: (context) => sl<UserCubit>()),
+        BlocProvider(create: (context) => sl<ProductCubit>()),
       ],
       child: MaterialApp(
         theme: theme,
