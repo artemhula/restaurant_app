@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant/utils/url.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({
@@ -33,10 +35,10 @@ class _ProductCardState extends State<ProductCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            'assets/philadelphia.jpg',
+          CachedNetworkImage(
+            imageUrl: '$url${widget.photoUrl}',
             fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height * 0.12,
+            height: MediaQuery.of(context).size.height * 0.16,
             width: double.infinity,
           ),
           Padding(
@@ -85,12 +87,16 @@ class _ProductCardState extends State<ProductCard> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            color: isInCart ? Theme.of(context).colorScheme.tertiary: Theme.of(context).colorScheme.primary,
+                            color: isInCart
+                                ? Theme.of(context).colorScheme.tertiary
+                                : Theme.of(context).colorScheme.primary,
                             borderRadius: BorderRadius.circular(15)),
-                        child:  Padding(
-                          padding:
-                              const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                          child: Icon(isInCart ? Icons.check_rounded : Icons.shopping_cart_outlined),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 16),
+                          child: Icon(isInCart
+                              ? Icons.check_rounded
+                              : Icons.shopping_cart_outlined),
                         ),
                       ),
                     ),

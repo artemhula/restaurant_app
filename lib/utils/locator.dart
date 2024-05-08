@@ -19,6 +19,8 @@ import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
 import 'package:restaurant/features/menu/data/datasource/remote_datasource.dart';
+import 'package:restaurant/features/menu/data/repository/product_repository.dart';
+import 'package:restaurant/features/menu/domain/repository/product_repository.dart';
 import 'package:restaurant/features/menu/domain/usecases/get_products.dart';
 import 'package:restaurant/features/menu/presentation/bloc/product_cubit/product_cubit.dart';
 import 'package:restaurant/utils/firebase_options.dart';
@@ -50,7 +52,10 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<FireStoreDataSource>(
       () => FireStoreDataSourceImpl(sl()));
   sl.registerLazySingleton<LocalDatasource>(
-      () => LocalDatasourceImpl(box: sl(instanceName: 'userBox')));
+      () => LocalDatasourceImpl
+      (box: sl(instanceName: 'userBox')));
+  sl.registerLazySingleton<ProductRepository>(
+      () => ProductRepositoryImpl(sl()));
   sl.registerLazySingleton<ProductRemoteDataSource>(
       () => ProductRemoteDataSourceImpl(dio: sl()));
 
