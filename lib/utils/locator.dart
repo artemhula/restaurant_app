@@ -18,6 +18,7 @@ import 'package:restaurant/features/auth/domain/usecases/send_otp.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
+import 'package:restaurant/features/cart/presentation/bloc/cart_cubit/cart_cubit.dart';
 import 'package:restaurant/features/menu/data/datasource/remote_datasource.dart';
 import 'package:restaurant/features/menu/data/repository/product_repository.dart';
 import 'package:restaurant/features/menu/domain/repository/product_repository.dart';
@@ -34,6 +35,7 @@ Future<void> initializeDependencies() async {
       () => RegistrationCubit(sl(), sl(), sl()));
   sl.registerFactory<UserCubit>(() => UserCubit(sl(), sl()));
   sl.registerFactory<ProductCubit>(() => ProductCubit(sl()));
+  sl.registerFactory<CartCubit>(() => CartCubit());
 
   //usecases
   sl.registerLazySingleton(() => SendOtp(authRepository: sl()));

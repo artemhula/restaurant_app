@@ -12,7 +12,8 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as MainScreenArguments;
+    final args =
+        ModalRoute.of(context)!.settings.arguments as MainScreenArguments;
     final user = args.user;
 
     return DefaultTabController(
@@ -34,14 +35,27 @@ class MainScreen extends StatelessWidget {
           ],
         ),
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // hello text
             Padding(
               padding: const EdgeInsets.all(20),
-              child: Text(
-                'Привіт, ${user.name}.',
-                style: Theme.of(context).textTheme.headlineLarge,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Привіт, ${user.name}.',
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.06,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: const Icon(Icons.shopping_cart_outlined),
+                  ),
+                ],
               ),
             ),
 
