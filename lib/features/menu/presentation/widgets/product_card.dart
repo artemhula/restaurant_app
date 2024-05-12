@@ -1,5 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant/features/cart/presentation/bloc/cart_cubit/cart_cubit.dart';
+import 'package:restaurant/features/menu/data/models/product.dart';
+import 'package:restaurant/features/menu/domain/entity/category.dart';
 import 'package:restaurant/utils/url.dart';
 
 class ProductCard extends StatefulWidget {
@@ -10,19 +14,24 @@ class ProductCard extends StatefulWidget {
     required this.title,
     required this.weight,
     required this.price,
+    required this.category,
+    required this.description,
+    required this.isInCart,
   });
   final int id;
   final String photoUrl;
   final String title;
   final int weight;
   final int price;
+  final Category category;
+  final String description;
+  final bool isInCart;
 
   @override
   State<ProductCard> createState() => _ProductCardState();
 }
 
 class _ProductCardState extends State<ProductCard> {
-  bool isInCart = false;
 
   @override
   Widget build(BuildContext context) {
@@ -81,22 +90,29 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          isInCart = !isInCart;
-                        });
+                        context.read<CartCubit>().toggleProductInCart(
+                              ProductModel(
+                                id: widget.id,
+                                name: widget.title,
+                                category: widget.category,
+                                price: widget.price,
+                                weight: widget.weight,
+                                description: widget.description,
+                                imageUrl: widget.photoUrl,
+                              ),
+                            );
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            color: isInCart
+                            color: widget.isInCart
                                 ? Theme.of(context).colorScheme.tertiary
                                 : Theme.of(context).colorScheme.primary,
                             borderRadius: BorderRadius.circular(15)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 8, horizontal: 16),
-                          child: Icon(isInCart
-                              ? Icons.check_rounded
-                              : Icons.shopping_cart_outlined),
+                          child:
+                              Icon(widget.isInCart ? Icons.check_rounded : Icons.add),
                         ),
                       ),
                     ),
