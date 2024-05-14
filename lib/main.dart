@@ -9,6 +9,7 @@ import 'package:restaurant/features/auth/presentation/views/otp_screen.dart';
 import 'package:restaurant/features/auth/presentation/views/phone_screen.dart';
 import 'package:restaurant/features/auth/presentation/views/registration_screen.dart';
 import 'package:restaurant/features/cart/presentation/bloc/cart_cubit/cart_cubit.dart';
+import 'package:restaurant/features/cart/presentation/views/cart_screen.dart';
 import 'package:restaurant/features/menu/presentation/bloc/product_cubit/product_cubit.dart';
 import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
 import 'package:restaurant/features/profile/view/profile_screen.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
           RegistrationScreen.routeName: (context) => const RegistrationScreen(),
           MainScreen.routeName:(context) => const MainScreen(),
           ProfileScreen.routeName:(context) => const ProfileScreen(),
+          CartScreen.routeName :(context) => const CartScreen(),
         },
       ),
     );
