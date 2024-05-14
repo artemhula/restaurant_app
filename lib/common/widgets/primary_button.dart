@@ -5,16 +5,20 @@ class PrimaryButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.text,
+    this.isActive = true,
   });
   final VoidCallback onPressed;
   final String text;
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onPressed,
+      onPressed: isActive ? onPressed : null,
       style: TextButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: isActive
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.tertiary.withOpacity(0.1),
         foregroundColor: Colors.white,
       ),
       child: Padding(
