@@ -22,7 +22,6 @@ class CartCubit extends Cubit<CartState> {
       _cart.add(CartItemModel(item: product));
     }
     emit(CartLoaded(cart: _cart));
-    print(_cart);
   }
 
   void incrementProductInCart(ProductEntity product) {
@@ -33,7 +32,6 @@ class CartCubit extends Cubit<CartState> {
       _cart.add(CartItemModel(item: product));
     }
     emit(CartLoaded(cart: _cart));
-    print(_cart);
   }
 
   void decrementProductInCart(ProductEntity product) {
@@ -48,6 +46,9 @@ class CartCubit extends Cubit<CartState> {
       _cart.add(CartItemModel(item: product));
     }
     emit(CartLoaded(cart: _cart));
-    print(_cart);
+  }
+
+  void eraseCart(){
+    _cart = [];
   }
 }

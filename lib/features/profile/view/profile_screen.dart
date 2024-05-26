@@ -4,6 +4,7 @@ import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit
 import 'package:restaurant/features/auth/presentation/views/phone_screen.dart';
 import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
 import 'package:restaurant/common/widgets/primary_button.dart';
+import 'package:restaurant/features/cart/presentation/bloc/cart_cubit/cart_cubit.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -55,6 +56,7 @@ class ProfileScreen extends StatelessWidget {
                 PrimaryButton(
                   onPressed: () {
                     context.read<UserCubit>().logOut();
+                    context.read<CartCubit>().eraseCart();
                   },
                   text: 'Вийти з аккаунту',
                 ),
