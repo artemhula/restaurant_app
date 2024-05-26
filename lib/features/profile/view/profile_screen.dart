@@ -29,14 +29,43 @@ class ProfileScreen extends StatelessWidget {
         if (state is UserLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        return Center(
-          child: PrimaryButton(
-            onPressed: () {
-              context.read<UserCubit>().logOut();
-            },
-            text: 'Вийти з аккаунту',
-          ),
-        );
+        if (state is UserLoaded) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: MediaQuery.of(context).size.width * 0.1,
+                  child: Icon(
+                    Icons.person,
+                    size: MediaQuery.of(context).size.width * 0.1,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  state.user.name,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  'Стать: ${state.user.sex ? 'Чоловіча' : 'Жіноча'}',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 15),
+                PrimaryButton(
+                  onPressed: () {
+                    context.read<UserCubit>().logOut();
+                  },
+                  text: 'Вийти з аккаунту',
+                ),
+                const SizedBox(height: 15),
+                Text(state.user.uid,
+                    style: Theme.of(context).textTheme.bodySmall),
+              ],
+            ),
+          );
+        }
+        return Container();
       },
     );
   }
