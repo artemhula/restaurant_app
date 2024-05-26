@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/common/widgets/primary_button.dart';
 import 'package:restaurant/features/cart/domain/entity/item/cart_item.dart';
+import 'package:restaurant/features/cart/presentation/views/map_screen.dart';
 import 'package:restaurant/features/cart/presentation/widgets/cart_item_divider.dart';
 import 'package:restaurant/features/cart/presentation/widgets/cart_item_tile.dart';
 
@@ -62,7 +63,13 @@ class CartItemListView extends StatelessWidget {
         SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         SizedBox(
           width: double.infinity,
-          child: PrimaryButton(onPressed: () {}, text: 'Далі', isActive: cart.isNotEmpty),
+          child: PrimaryButton(
+            onPressed: () {
+              Navigator.pushNamed(context, MapScreen.routeName);
+            },
+            text: 'Далі',
+            isActive: cart.isNotEmpty,
+          ),
         ),
       ],
     );

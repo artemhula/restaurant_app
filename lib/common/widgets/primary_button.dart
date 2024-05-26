@@ -18,7 +18,7 @@ class PrimaryButton extends StatelessWidget {
       style: TextButton.styleFrom(
         backgroundColor: isActive
             ? Theme.of(context).colorScheme.primary
-            : Theme.of(context).colorScheme.tertiary.withOpacity(0.1),
+            : Theme.of(context).colorScheme.tertiary.withOpacity(0.2),
         foregroundColor: Colors.white,
       ),
       child: Padding(
