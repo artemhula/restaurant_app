@@ -3,6 +3,7 @@ import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/common/widgets/primary_button.dart';
 import 'package:restaurant/features/cart/presentation/bloc/address_cubit/address_cubit.dart';
+import 'package:restaurant/features/cart/presentation/views/order_screen.dart';
 import 'package:restaurant/features/cart/presentation/widgets/location_picker.dart';
 
 class MapScreen extends StatelessWidget {
@@ -52,8 +53,7 @@ class MapScreen extends StatelessWidget {
                     PrimaryButton(
                       onPressed: state is AddressLoaded
                           ? () {
-                              print(
-                                  '${state.city}, ${state.street} ${state.name}');
+                              Navigator.pushNamed(context, OrderScreen.routeName);
                             }
                           : () {},
                       text: 'Далі',

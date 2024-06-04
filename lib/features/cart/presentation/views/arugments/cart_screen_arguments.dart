@@ -1,0 +1,3 @@
+class CartScreenArguments {
+  
+}

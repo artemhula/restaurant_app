@@ -11,6 +11,7 @@ import 'package:restaurant/features/auth/presentation/views/registration_screen.
 import 'package:restaurant/features/cart/presentation/bloc/address_cubit/address_cubit.dart';
 import 'package:restaurant/features/cart/presentation/bloc/cart_cubit/cart_cubit.dart';
 import 'package:restaurant/features/cart/presentation/views/cart_screen.dart';
+import 'package:restaurant/features/cart/presentation/views/order_screen.dart';
 import 'package:restaurant/features/cart/presentation/views/map_screen.dart';
 import 'package:restaurant/features/menu/presentation/bloc/product_cubit/product_cubit.dart';
 import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
           ProfileScreen.routeName:(context) => const ProfileScreen(),
           CartScreen.routeName :(context) => const CartScreen(),
           MapScreen.routeName :(context) => const MapScreen(),
+          OrderScreen.routeName:(context) => const OrderScreen(),
         },
       ),
     );
