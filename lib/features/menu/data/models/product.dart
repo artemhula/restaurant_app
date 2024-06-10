@@ -15,7 +15,7 @@ class ProductModel extends ProductEntity {
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
-        'category': category,
+        'category': category.toString().split('.').last,
         'price': price,
         'weight': weight,
         'description': description,

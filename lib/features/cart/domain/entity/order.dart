@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:restaurant/features/auth/domain/entity/user.dart';
 import 'package:restaurant/features/cart/domain/entity/item/cart_item.dart';
 
-class Order extends Equatable {
-  const Order({
+class OrderEntity extends Equatable {
+  const OrderEntity({
     required this.user,
     required this.cart,
     required this.address,
