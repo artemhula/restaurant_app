@@ -18,8 +18,13 @@ import 'package:restaurant/features/auth/domain/usecases/send_otp.dart';
 import 'package:restaurant/features/auth/presentation/bloc/auth_cubit/auth_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
+import 'package:restaurant/features/cart/data/datasource/remote_datasource.dart';
+import 'package:restaurant/features/cart/data/repository/order_repository.dart';
+import 'package:restaurant/features/cart/domain/repository/order_repository.dart';
+import 'package:restaurant/features/cart/domain/usecases/create_order.dart';
 import 'package:restaurant/features/cart/presentation/bloc/address_cubit/address_cubit.dart';
 import 'package:restaurant/features/cart/presentation/bloc/cart_cubit/cart_cubit.dart';
+import 'package:restaurant/features/cart/presentation/bloc/order_cubit/order_cubit.dart';
 import 'package:restaurant/features/menu/data/datasource/remote_datasource.dart';
 import 'package:restaurant/features/menu/data/repository/product_repository.dart';
 import 'package:restaurant/features/menu/domain/repository/product_repository.dart';
@@ -38,6 +43,7 @@ Future<void> initializeDependencies() async {
   sl.registerFactory<ProductCubit>(() => ProductCubit(sl()));
   sl.registerFactory<CartCubit>(() => CartCubit());
   sl.registerFactory<AddressCubit>(() => AddressCubit());
+  sl.registerFactory<OrderCubit>(() => OrderCubit(sl()));
 
   //usecases
   sl.registerLazySingleton(() => SendOtp(authRepository: sl()));
@@ -47,6 +53,7 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton(() => GetUser(authRepository: sl()));
   sl.registerLazySingleton(() => LeaveUser(authRepository: sl()));
   sl.registerLazySingleton(() => GetProducts(productRepository: sl()));
+  sl.registerLazySingleton(() => CreateOrder(orderRepository: sl()));
 
   //repo and ds
   sl.registerLazySingleton<AuthRepository>(
@@ -56,12 +63,15 @@ Future<void> initializeDependencies() async {
   sl.registerLazySingleton<FireStoreDataSource>(
       () => FireStoreDataSourceImpl(sl()));
   sl.registerLazySingleton<LocalDatasource>(
-      () => LocalDatasourceImpl
-      (box: sl(instanceName: 'userBox')));
+      () => LocalDatasourceImpl(box: sl(instanceName: 'userBox')));
   sl.registerLazySingleton<ProductRepository>(
       () => ProductRepositoryImpl(sl()));
   sl.registerLazySingleton<ProductRemoteDataSource>(
       () => ProductRemoteDataSourceImpl(dio: sl()));
+  sl.registerLazySingleton<OrderRepositoty>(
+      () => OrderRepositotyImpl(dataSource: sl()));
+  sl.registerLazySingleton<OrderDataSource>(
+      () => OrderDataSourceImpl(dio: sl()));
 
   //ext
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

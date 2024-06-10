@@ -49,6 +49,8 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void eraseCart(){
+    emit(CartLoading());
     _cart = [];
+    emit(CartLoaded(cart: _cart));
   }
 }
