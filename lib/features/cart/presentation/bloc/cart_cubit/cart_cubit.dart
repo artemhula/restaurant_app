@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/features/cart/data/models/cart_item.dart';
-import 'package:restaurant/features/cart/domain/entity/item/cart_item.dart';
+import 'package:restaurant/features/cart/domain/entity/cart_item.dart';
 import 'package:restaurant/features/menu/domain/entity/product.dart';
 
 part 'cart_state.dart';

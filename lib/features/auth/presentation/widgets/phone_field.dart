@@ -65,6 +65,8 @@ class _PhoneFieldState extends State<PhoneField> {
                   textStyle: Theme.of(context).textTheme.labelLarge,
                   inputDecoration: InputDecoration(
                     hintText: 'Пошук',
+                    hintStyle: Theme.of(context).textTheme.labelLarge,
+                    contentPadding: const EdgeInsets.only(left: 20),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),

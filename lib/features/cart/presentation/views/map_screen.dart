@@ -20,6 +20,7 @@ class MapScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Куди доставляємо?'),
+        centerTitle: true,
       ),
       body: Column(
         children: [

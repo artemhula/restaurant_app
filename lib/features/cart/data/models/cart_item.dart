@@ -1,4 +1,4 @@
-import 'package:restaurant/features/cart/domain/entity/item/cart_item.dart';
+import 'package:restaurant/features/cart/domain/entity/cart_item.dart';
 import 'package:restaurant/features/menu/data/models/product.dart';
 
 class CartItemModel extends CartItem {

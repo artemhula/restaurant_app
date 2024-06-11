@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/common/widgets/primary_button.dart';
 import 'package:restaurant/features/auth/data/models/user.dart';
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
-import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
+import 'package:restaurant/common/widgets/error_snackbar.dart';
 import 'package:restaurant/features/cart/data/models/order.dart';
 import 'package:restaurant/features/cart/presentation/bloc/address_cubit/address_cubit.dart';
 import 'package:restaurant/features/cart/presentation/bloc/cart_cubit/cart_cubit.dart';
@@ -28,7 +28,8 @@ class OrderScreen extends StatelessWidget {
         return OrderModel(
             user: userState.user as UserModel,
             cart: cartState.cart,
-            address: addressState.city);
+            address:
+                '${addressState.city}, ${addressState.street} ${addressState.name}');
       }
       return null;
     }

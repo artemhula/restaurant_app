@@ -21,15 +21,17 @@ class MainScreen extends StatelessWidget {
       length: tabs.length,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('cafe'),
+          title: Image.asset(
+            'assets/logo.png',
+            height: MediaQuery.of(context).size.height * 0.07,
+          ),
+          centerTitle: true,
           actions: const [
-            //profile button
             ProfileButton(),
           ],
         ),
         body: Column(
           children: [
-            // hello text
             Padding(
               padding: const EdgeInsets.all(20),
               child: Row(
@@ -43,11 +45,7 @@ class MainScreen extends StatelessWidget {
                 ],
               ),
             ),
-
-            //tabbar
             const CategoryTabBar(),
-
-            //tabbar views
             const CategoryTabView(),
           ],
         ),
@@ -55,4 +53,3 @@ class MainScreen extends StatelessWidget {
     );
   }
 }
-

@@ -22,7 +22,13 @@ class PhoneScreen extends StatelessWidget {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Image.asset(
+                'assets/logo.png',
+                width: MediaQuery.of(context).size.width * 0.4,
+              ),
+              const SizedBox(height: 20),
               Text(
                 'Введіть свій номер телефону',
                 style: Theme.of(context).textTheme.headlineLarge,

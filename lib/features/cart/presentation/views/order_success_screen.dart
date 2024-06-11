@@ -23,7 +23,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1700),
+      duration: const Duration(milliseconds: 1500),
     );
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
     _animationController.forward();

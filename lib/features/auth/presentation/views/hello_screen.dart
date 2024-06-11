@@ -5,10 +5,10 @@ import 'package:restaurant/features/auth/presentation/views/phone_screen.dart';
 import 'package:restaurant/features/menu/presentation/views/arguments/main_screen_arguments.dart';
 import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
 
-class InitialScreen extends StatelessWidget {
-  const InitialScreen({super.key});
+class HelloScreen extends StatelessWidget {
+  const HelloScreen({super.key});
 
-  static const routeName = '/initial';
+  static const routeName = '/hello';
 
   @override
   Widget build(BuildContext context) {

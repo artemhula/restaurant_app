@@ -5,7 +5,7 @@ import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/re
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
 import 'package:restaurant/features/auth/presentation/views/arguments/otp_screen_arguments.dart';
 import 'package:restaurant/features/auth/presentation/views/registration_screen.dart';
-import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
+import 'package:restaurant/common/widgets/error_snackbar.dart';
 import 'package:restaurant/features/auth/presentation/widgets/otp_field.dart';
 import 'package:restaurant/features/auth/presentation/widgets/resend_button.dart';
 import 'package:restaurant/features/menu/presentation/views/arguments/main_screen_arguments.dart';

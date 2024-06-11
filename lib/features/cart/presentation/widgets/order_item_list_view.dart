@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant/features/cart/domain/entity/item/cart_item.dart';
+import 'package:restaurant/features/cart/domain/entity/cart_item.dart';
 
 class OrderItemListView extends StatelessWidget {
   const OrderItemListView({

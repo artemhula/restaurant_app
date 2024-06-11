@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant/features/profile/view/profile_screen.dart';
+import 'package:restaurant/features/auth/presentation/views/profile_screen.dart';
 
 class ProfileButton extends StatelessWidget {
   const ProfileButton({

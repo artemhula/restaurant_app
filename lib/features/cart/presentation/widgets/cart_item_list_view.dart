@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/common/widgets/primary_button.dart';
-import 'package:restaurant/features/cart/domain/entity/item/cart_item.dart';
+import 'package:restaurant/features/cart/domain/entity/cart_item.dart';
 import 'package:restaurant/features/cart/presentation/views/map_screen.dart';
 import 'package:restaurant/features/cart/presentation/widgets/cart_item_divider.dart';
 import 'package:restaurant/features/cart/presentation/widgets/cart_item_tile.dart';

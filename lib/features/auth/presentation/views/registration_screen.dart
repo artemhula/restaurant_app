@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant/features/auth/presentation/bloc/registration_cubit/registration_cubit.dart';
 import 'package:restaurant/features/auth/presentation/bloc/user_cubit/user_cubit.dart';
-import 'package:restaurant/features/auth/presentation/widgets/error_snackbar.dart';
+import 'package:restaurant/common/widgets/error_snackbar.dart';
 import 'package:restaurant/features/auth/presentation/widgets/registration_form.dart';
 import 'package:restaurant/features/menu/presentation/views/arguments/main_screen_arguments.dart';
 import 'package:restaurant/features/menu/presentation/views/main_screen.dart';
