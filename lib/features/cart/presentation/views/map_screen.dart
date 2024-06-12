@@ -40,9 +40,9 @@ class MapScreen extends StatelessWidget {
                       const CircularProgressIndicator()
                     else if (state is AddressLoaded)
                       Text(
-                        state.city == 'Odesa'
-                            ? 'Обрана адреса: ${state.city}, ${state.street} ${state.name}'
-                            : 'Доставка за цією адресою неможлива',
+                        
+                            'Обрана адреса: ${state.city}, ${state.street} ${state.name}'
+                            ,
                         style: Theme.of(context).textTheme.headlineSmall,
                       )
                     else if (state is AddressFailure)
@@ -58,7 +58,7 @@ class MapScreen extends StatelessWidget {
                             }
                           : () {},
                       text: 'Далі',
-                      isActive: state is AddressLoaded && state.city == 'Odesa',
+                      isActive: state is AddressLoaded,
                     ),
                   ],
                 ),
