@@ -34,9 +34,9 @@ class RestaurantApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: theme,
-        home: const HelloScreen(),
         debugShowCheckedModeBanner: false,
-        routes: routes,
+        initialRoute: HelloScreen.routeName,
+        onGenerateRoute: (route) => onGenerateRoute(route),
       ),
     );
   }
