@@ -1,16 +1,24 @@
-# restaurant
+# Restaurant App
 
-A new Flutter project.
+Welcome to the **Restaurant App** repository! This app providing a user-friendly and clear interface for browsing and ordering food from a restaurant. Below you will find an overview of the features and technologies used.
 
-## Getting Started
+## Demo Video
 
-This project is a starting point for a Flutter application.
+Watch this demo video to see the app in action!
 
-A few resources to get you started if this is your first Flutter project:
+https://github.com/artemhula/restaurant_app/assets/66064927/6c068439-894a-4115-944e-f07a448f75c9
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+
+- **OTP Verification**: Secure login and user verification using Firebase OTP.
+- **Product Loading**: Fetch and display restaurant products dynamically from a custom-built API.
+- **Map point selection**: Display the map and select a point on the map
+
+
+## Technologies Used
+
+- **Firebase**: Implemented OTP verification to ensure secure user authentication.
+- **Dio**: Utilized Dio for efficient HTTP requests and handling API interactions.
+- **OSM & Geocoding**: Selecting a mark on the map and obtaining coordinates
+- **FastAPI**: The backend API is built with FastAPI to provide fast and reliable data fetching.
