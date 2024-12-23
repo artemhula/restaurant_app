@@ -1,8 +1,8 @@
-# Restaurant App
+#  🍣 Restaurant App
 
-**App for browsing and ordering food from restaurants**
+**App for browsing and ordering food from restaurant**
 
-This Flutter application provides a user-friendly interface for browsing restaurant menus and placing orders, with secure OTP-based login and map point selection for delivery.
+This Flutter application provides a user-friendly interface for browsing restaurant menus and placing orders, with OTP-based login and map point selection for delivery.
 
 ## 📋 Features
 - **OTP Verification**: Secure login using Firebase OTP.
